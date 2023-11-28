@@ -1,25 +1,12 @@
 import {useState} from 'react';
+import PitcherList from '../PitcherList/PitcherList';
+import CatcherList from '../CatcherList/CatcherList';
 
 function App() {
-  const [currentPitcher, setCurrentPitcher] = useState('Maud Nelson');
   const [currentCatcher, setCurrentCatcher] = useState('Elston Howard');
-
-  const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
   const [catcherList, setCatcherList] = useState(['Roy Campanella', 'Elston Howard', 'Kenji Jojima']);
-  const [newPitcher, setNewPitcher] = useState('');
   const [newCatcher, setNewCatcher] = useState('');
 
-  const handlePitcherNameChange = event => {
-    setNewPitcher(event.target.value);
-  };
-
-  // add new pitcher to the array. this will move to the pitcher reducer!
-  const handlePitcherSubmit = event => {
-    event.preventDefault();
-    // spread: give me everything in pitcherList, then add this new thing
-    setPitcherList([...pitcherList, newPitcher]);
-    setNewPitcher('');
-  };
 
   const handleCatcherNameChange = event => {
     setNewCatcher(event.target.value);
@@ -40,25 +27,9 @@ function App() {
       <h2>Behind the Plate: {currentCatcher}</h2>
       <div>Total Pitchers: {pitcherList.length}</div>
       <div>Total Catchers: {catcherList.length}</div>
-      <h3>All Pitchers</h3>
-      <form onSubmit={handlePitcherSubmit}>
-        <input
-          type="text"
-          value={newPitcher}
-          onChange={handlePitcherNameChange}
-          placeholder="New Pitcher Name"
-        />
-        <button type="submit">Add Pitcher</button>
-      </form>
-      <ul>
-        {pitcherList.map(pitcher => (
-          <li
-            onClick={() => setCurrentPitcher(pitcher)}
-          >
-            {pitcher}
-          </li>
-        ))}
-      </ul>
+      
+      <PitcherList />
+
       <h3>All Catchers</h3>
       <form onSubmit={handleCatcherSubmit}>
         <input
