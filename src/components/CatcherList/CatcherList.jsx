@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
-function CatcherList() {
-    const [currentCatcher, setCurrentCatcher] = useState('Elston Howard');
+function CatcherList({ setCurrentCatcher }) {
+    // const [currentCatcher, setCurrentCatcher] = useState('Elston Howard');
 
     // const [catcherList, setCatcherList] = useState(['Roy Campanella', 'Elston Howard', 'Kenji Jojima']);
 
@@ -10,12 +10,12 @@ function CatcherList() {
 
     const dispatch = useDispatch()
 
-    const pitcherList = useSelector((store) => store.catcherNames)
+    const catcherList = useSelector((store) => store.catcherList)
   
   
-    const handleCatcherNameChange = event => {
-      setNewCatcher(event.target.value);
-    };
+    // const handleCatcherNameChange = event => {
+    //   setNewCatcher(event.target.value);
+    // };
   
     // add new catcher to array. this will move to the catcher reducer!
     const handleCatcherSubmit = event => {
@@ -38,7 +38,7 @@ function CatcherList() {
                 <input
                     type="text"
                     value={newCatcher}
-                    onChange={handleCatcherNameChange}
+                    onChange={(e) => setNewCatcher(e.target.value)}
                     placeholder="New Catcher Name"
                 />
                 <button type="submit">Add Catcher</button>

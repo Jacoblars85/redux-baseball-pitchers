@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
-function PitcherList() {
-    const [currentPitcher, setCurrentPitcher] = useState('Maud Nelson');
+function PitcherList({ setCurrentPitcher }) {
+    // const [currentPitcher, setCurrentPitcher] = useState('Maud Nelson');
 
     // const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
 
@@ -10,7 +10,7 @@ function PitcherList() {
 
     const dispatch = useDispatch()
 
-    const pitcherList = useSelector((store) => store.pitcherNames)
+    const pitcherList = useSelector((store) => store.pitcherList)
 
     // const handlePitcherNameChange = event => {
     //     setNewPitcher(event.target.value);
