@@ -5,7 +5,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 
-const PitcherNames = (state=[], action) => {
+const pitcherNames = (state=['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia'], action) => {
     if (action.type === 'CREATE_PITCHER') {
         const newPitcher = action.payload
 
@@ -14,7 +14,7 @@ const PitcherNames = (state=[], action) => {
     return state
 }
 
-const catcherNames = (state=[], action) => {
+const catcherNames = (state=['Roy Campanella', 'Elston Howard', 'Kenji Jojima'], action) => {
     if (action.type === 'CREATE_CATCHER') {
         const newCatcher = action.payload
 
@@ -26,7 +26,7 @@ const catcherNames = (state=[], action) => {
 
 const ourReduxStore = createStore(
     combineReducers({
-        PitcherNames,
+        pitcherNames,
         catcherNames
     })
 )

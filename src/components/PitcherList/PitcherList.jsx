@@ -1,23 +1,34 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 
 function PitcherList() {
     const [currentPitcher, setCurrentPitcher] = useState('Maud Nelson');
 
-    const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
+    // const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
 
     const [newPitcher, setNewPitcher] = useState('');
 
-    const handlePitcherNameChange = event => {
-        setNewPitcher(event.target.value);
-      };
+    const dispatch = useDispatch()
 
-      // add new pitcher to the array. this will move to the pitcher reducer!
-  const handlePitcherSubmit = event => {
-    event.preventDefault();
-    // spread: give me everything in pitcherList, then add this new thing
-    setPitcherList([...pitcherList, newPitcher]);
-    setNewPitcher('');
-  };
+    const pitcherList = useSelector((store) => store.pitcherNames)
+
+    // const handlePitcherNameChange = event => {
+    //     setNewPitcher(event.target.value);
+    // };
+
+    // add new pitcher to the array. this will move to the pitcher reducer!
+    const handlePitcherSubmit = event => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'CREATE_PITCHER',
+            payload: newPitcher
+        })
+
+        // spread: give me everything in pitcherList, then add this new thing
+        // setPitcherList([...pitcherList, newPitcher]);
+        setNewPitcher('');
+    };
 
     return (
         <div>
@@ -26,7 +37,7 @@ function PitcherList() {
                 <input
                     type="text"
                     value={newPitcher}
-                    onChange={handlePitcherNameChange}
+                    onChange={(e) => setNewPitcher(e.target.value)}
                     placeholder="New Pitcher Name"
                 />
                 <button type="submit">Add Pitcher</button>
